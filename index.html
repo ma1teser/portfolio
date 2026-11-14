@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Maleeha Abrar — Portfolio</title>
+  <meta name="description" content="Maleeha Abrar — multimedia designer: UI/UX, illustration, marketing and UGC." />
+  <link rel="icon" href="assets/logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300..900;1,300..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Anton&family=UnifrakturMaguntia&family=Abril+Fatface&family=Pinyon+Script&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <!-- polished gold, light → shadow → reflection -->
+      <linearGradient id="g-gold" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#FBEBB8" />
+        <stop offset=".35" stop-color="#D8B25C" />
+        <stop offset=".6" stop-color="#8E6522" />
+        <stop offset=".8" stop-color="#E6C77A" />
+        <stop offset="1" stop-color="#7A5419" />
+      </linearGradient>
+      <linearGradient id="g-gold-side" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#7E581C" />
+        <stop offset=".3" stop-color="#E9CB7E" />
+        <stop offset=".55" stop-color="#FFF1C4" />
+        <stop offset=".8" stop-color="#B98E3E" />
+        <stop offset="1" stop-color="#6E4A14" />
+      </linearGradient>
+      <radialGradient id="g-gold-ring" cx=".4" cy=".35" r=".7">
+        <stop offset="0" stop-color="#FFF3CC" />
+        <stop offset=".45" stop-color="#D9B460" />
+        <stop offset="1" stop-color="#6F4B16" />
+      </radialGradient>
+      <linearGradient id="g-wire" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#9C7428" />
+        <stop offset=".5" stop-color="#F6DE98" />
+        <stop offset="1" stop-color="#8A6420" />
+      </linearGradient>
+      <!-- coloured wire for the project-card paperclips (portfolio palette, with a shine down the middle) -->
+      <linearGradient id="g-wire-sakura" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#D98A8C" /><stop offset=".5" stop-color="#F7DCD8" /><stop offset="1" stop-color="#CF7C80" />
+      </linearGradient>
+      <linearGradient id="g-wire-aloe" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#5E3F27" /><stop offset=".5" stop-color="#B98E73" /><stop offset="1" stop-color="#4E3420" />
+      </linearGradient>
+      <linearGradient id="g-wire-tea" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#93694F" /><stop offset=".5" stop-color="#EBD3C4" /><stop offset="1" stop-color="#86604A" />
+      </linearGradient>
+    </defs>
+    <!-- project-card paperclip: the whole clip (shown above the polaroid's edge) and the front loop (shown over the photo).
+         The wire colour comes from --wire on each card. -->
+    <symbol id="i-pclip" viewBox="0 0 26 62">
+      <path d="M9 17 V45 a4.5 4.5 0 0 0 9 0 V11 a7.5 7.5 0 0 0 -15 0 V49 a10 10 0 0 0 20 0 V21" fill="none" style="stroke: var(--wire)" stroke-width="2.6" stroke-linecap="round" />
+    </symbol>
+    <symbol id="i-pclip-front" viewBox="0 0 26 62">
+      <path d="M9 17 V45 a4.5 4.5 0 0 0 9 0 V14" fill="none" style="stroke: var(--wire)" stroke-width="2.6" stroke-linecap="round" />
+    </symbol>
+    <!-- gold bulldog clip -->
+    <symbol id="i-binder" viewBox="0 0 64 58">
+      <rect x="19.5" y="22" width="25" height="5" rx="2" fill="url(#g-gold-side)" />
+      <path d="M23 36 L25 18 H39 L41 36 Z" fill="url(#g-gold-side)" />
+      <circle cx="32" cy="14" r="11.5" fill="url(#g-gold-ring)" />
+      <circle cx="32" cy="14" r="7.5" fill="none" stroke="#7A5419" stroke-opacity=".35" stroke-width="1.2" />
+      <circle cx="32" cy="14" r="3.6" fill="#fff" />
+      <rect x="3" y="34" width="58" height="14" rx="3" fill="url(#g-gold)" />
+      <rect x="4" y="46" width="56" height="7" rx="2" fill="#8E6522" />
+      <rect x="6" y="36.5" width="40" height="2.2" rx="1.1" fill="#FFF6D8" opacity=".75" />
+    </symbol>
+    <symbol id="i-paperclip" viewBox="0 0 26 62">
+      <path d="M9 17 V45 a4.5 4.5 0 0 0 9 0 V11 a7.5 7.5 0 0 0 -15 0 V49 a10 10 0 0 0 20 0 V21" fill="none" stroke="url(#g-wire)" stroke-width="2.4" stroke-linecap="round" />
+    </symbol>
+    <!-- just the inner loop — the part of the clip that sits on the front of the paper -->
+    <symbol id="i-paperclip-front" viewBox="0 0 26 62">
+      <path d="M9 17 V45 a4.5 4.5 0 0 0 9 0 V14" fill="none" stroke="url(#g-wire)" stroke-width="2.4" stroke-linecap="round" />
+    </symbol>
+    <!-- longer versions of the clip for the note card (same wire, longer straight sides) -->
+    <symbol id="i-paperclip-long" viewBox="0 0 26 84">
+      <path d="M9 17 V67 a4.5 4.5 0 0 0 9 0 V11 a7.5 7.5 0 0 0 -15 0 V71 a10 10 0 0 0 20 0 V21" fill="none" stroke="url(#g-wire)" stroke-width="2.4" stroke-linecap="round" />
+    </symbol>
+    <symbol id="i-paperclip-front-long" viewBox="0 0 26 84">
+      <path d="M9 17 V67 a4.5 4.5 0 0 0 9 0 V14" fill="none" stroke="url(#g-wire)" stroke-width="2.4" stroke-linecap="round" />
+    </symbol>
+    <symbol id="i-asterisk" viewBox="0 0 24 24">
+      <g stroke="currentColor" stroke-width="5.2" stroke-linecap="round">
+        <line x1="12" y1="3" x2="12" y2="21" />
+        <line x1="4.2" y1="7.5" x2="19.8" y2="16.5" />
+        <line x1="4.2" y1="16.5" x2="19.8" y2="7.5" />
+      </g>
+    </symbol>
+    <symbol id="i-arrow" viewBox="0 0 16 16">
+      <path d="M4 12 L12 4 M5.5 4 H12 V10.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+    </symbol>
+  </svg>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="Maleeha Abrar — home">
+        <img src="assets/logo.png" alt="ma* logo" width="1828" height="958" />
+      </a>
+
+      <nav class="nav" id="siteNav" aria-label="Main">
+        <a class="nav-link is-active" href="#top">Home</a>
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="workspace.html">Workspace</a>
+      </nav>
+
+      <a class="btn-resume" href="https://drive.google.com/file/d/1McTainVxFS0YrUtruIiKN_nSozdMekVg/view?usp=sharing" target="_blank" rel="noopener">
+        <span>Resume</span>
+        <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg>
+      </a>
+
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="siteNav">
+        <span class="menu-lines" aria-hidden="true"></span>
+        <span class="sr-only">Menu</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ============ HERO ============ -->
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <!-- "maleeha's" in bold brown, "Portfolio" in one big italic serif; the asterisk is the dot on the i -->
+          <h1 class="hero-title hero-title--serif" id="heroTitle" aria-label="maleeha’s Portfolio">
+            <span class="h-name" aria-hidden="true">maleeha’s</span>
+            <span class="h-port" aria-hidden="true"><span class="pf">Portfol<span class="i-star">ı<svg class="star star--flower" viewBox="-100 -100 200 200" aria-hidden="true"><g fill="currentColor"><use href="#petal" /><use href="#petal" transform="rotate(60)" /><use href="#petal" transform="rotate(120)" /><use href="#petal" transform="rotate(180)" /><use href="#petal" transform="rotate(240)" /><use href="#petal" transform="rotate(300)" /><circle r="24" /></g></svg></span>o</span></span>
+          </h1>
+
+          <div class="notecard-wrap">
+            <!-- more sheets of paper tucked underneath the note card -->
+            <div class="notecard-under notecard-under--back" aria-hidden="true"></div>
+            <div class="notecard-under" aria-hidden="true"></div>
+            <svg class="clip clip--back" aria-hidden="true"><use href="#i-paperclip-long" /></svg>
+            <div class="notecard">
+              <p class="nc-lead">i’m a multimedia designer who:</p>
+              <p class="nc-rotator" aria-live="polite"><span class="nc-word" id="ncWord"><em>designs</em> for user experience</span></p>
+              <!-- simple arrow: click to scroll down to the project folders -->
+              <a class="nc-arrow" href="#projects" aria-label="Scroll down to my projects">
+                <svg viewBox="0 0 24 48" aria-hidden="true">
+                  <path d="M12 3 V43" />
+                  <path d="M4.5 35.5 L12 43 L19.5 35.5" />
+                </svg>
+              </a>
+            </div>
+            <svg class="clip clip--front" aria-hidden="true"><use href="#i-paperclip-front-long" /></svg>
+          </div>
+        </div>
+
+        <!-- Reserved space beside your name. Add anything you like here. -->
+        <div class="hero-aside" aria-hidden="true">
+          <!-- faint six-petal flower, slowly spinning behind the note card -->
+          <svg class="hero-flower" viewBox="-100 -100 200 200">
+            <defs>
+              <path id="petal" d="M-10 2 C-16 -26 -33 -50 -32 -66 A26 26 0 0 1 20 -78 C26 -60 17 -30 12 2 Z" />
+            </defs>
+            <g fill="currentColor">
+              <use href="#petal" />
+              <use href="#petal" transform="rotate(60)" />
+              <use href="#petal" transform="rotate(120)" />
+              <use href="#petal" transform="rotate(180)" />
+              <use href="#petal" transform="rotate(240)" />
+              <use href="#petal" transform="rotate(300)" />
+              <circle r="24" />
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WORKSPACE (folders) ============ -->
+    <section class="workspace" id="workspace" aria-labelledby="wsTitle">
+      <h2 class="sr-only" id="wsTitle">Workspace</h2>
+
+      <div class="cabinet">
+
+        <!-- ===== About folder — always open ===== -->
+        <article class="folder folder--paper folder--static is-open is-settled" data-align="left" aria-labelledby="tab-about">
+          <div class="folder-tab-row">
+            <div class="folder-tab" id="tab-about">
+              <span class="tab-name">about me</span>
+            </div>
+          </div>
+          <div class="folder-body">
+            <div class="folder-reveal">
+              <div class="folder-reveal-inner">
+                <div class="folder-content folder-content--about">
+                  <div class="notes">
+                    <p class="kicker">Global Business &amp; Digital Arts (GBDA) · University of Waterloo</p>
+                    <p class="about-text">I’m Maleeha, a Global Business and Digital Arts (GBDA) student at the University of Waterloo, focused on multimedia design and marketing. I’m into digital marketing, UI/UX, content strategy and telling stories through visuals. I’ve made content for social media and other digital platforms, mostly graphics and short-form videos for campaigns, and I always design with the person on the other end in mind.</p>
+                    <a class="btn btn-ink" href="about.html">tell me more <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ===== Projects folder — always open, one case-study file per project ===== -->
+        <article class="folder folder--choc folder--static folder--projects is-open is-settled" id="projects" data-align="left" aria-labelledby="tab-projects">
+          <div class="folder-tab-row">
+            <div class="folder-tab" id="tab-projects">
+              <span class="tab-name">projects</span>
+            </div>
+          </div>
+          <div class="folder-body">
+            <div class="folder-reveal">
+              <div class="folder-reveal-inner">
+                <ul class="cases">
+
+                  <!-- ===== GraceFully ===== -->
+                  <li class="case-item">
+                    <a class="casestudy" href="gracefully.html" aria-label="Open the GraceFully case study">
+                      <span class="cs-stage">
+                        <span class="cs-photo-back"><img src="assets/gracefully-2.jpg" alt="GraceFully banner: a food delivery app, for seniors." width="369" height="941" /></span>
+                        <span class="cs-sheet cs-sheet--1"></span>
+                        <span class="cs-sheet cs-sheet--2"></span>
+                        <span class="cs-strip"></span>
+                        <span class="cs-folder">
+                          <span class="cs-tab"><span>proj 01</span></span>
+                          <span class="cs-title">
+                            <span class="cs-name">GraceFully</span>
+                          </span>
+                          <span class="cs-year">2026</span>
+                          <span class="cs-desc">A food-delivery app and brand I designed to be easy for seniors to use.</span>
+                        </span>
+                        <span class="cs-polaroid">
+                          <img class="cs-logo" src="assets/gracefully.png" alt="GraceFully logo: a smiling red apple" width="1200" height="1176" />
+                          <svg class="cs-pclip cs-pclip--back" style="--wire: url(#g-wire-sakura)" aria-hidden="true"><use href="#i-pclip" /></svg><svg class="cs-pclip" style="--wire: url(#g-wire-sakura)" aria-hidden="true"><use href="#i-pclip-front" /></svg>
+                        </span>
+                      </span>
+                    </a>
+                  </li>
+
+                  <!-- ===== Stratford Cinemas ===== -->
+                  <li class="case-item">
+                    <a class="casestudy" href="stratford.html" aria-label="Open the Stratford Cinemas case study">
+                      <span class="cs-stage">
+                        <!-- banner peeking out from behind the folder -->
+                        <span class="cs-photo-back"><img src="assets/stratford-2.jpg" alt="Stratford Cinemas banner: the logo over dark cinema seats, website redesign and UX case study" width="833" height="2000" /></span>
+                        <span class="cs-sheet cs-sheet--1"></span>
+                        <span class="cs-sheet cs-sheet--2"></span>
+                        <span class="cs-strip"></span>
+                        <span class="cs-folder">
+                          <span class="cs-tab"><span>proj 02</span></span>
+                          <span class="cs-title">
+                            <span class="cs-name">Stratford Cinemas</span>
+                          </span>
+                          <span class="cs-year">2025</span>
+                          <span class="cs-desc">A redesign of Stratford&rsquo;s local cinema website, based on surveys and testing with real users.</span>
+                        </span>
+                        <!-- polaroid: the redesigned logo -->
+                        <span class="cs-polaroid">
+                          <img class="cs-logo cs-logo--dark" src="assets/stratford/new-logo-white.png" alt="Stratford Cinemas logo in white on black" width="1419" height="707" />
+                          <svg class="cs-pclip cs-pclip--back" style="--wire: url(#g-wire-aloe)" aria-hidden="true"><use href="#i-pclip" /></svg><svg class="cs-pclip" style="--wire: url(#g-wire-aloe)" aria-hidden="true"><use href="#i-pclip-front" /></svg>
+                        </span>
+                      </span>
+                    </a>
+                  </li>
+
+                  <!-- ===== Project Three: coming soon (not clickable yet; the café placeholder page is project-three.html) ===== -->
+                  <li class="case-item">
+                    <div class="casestudy casestudy--soon" aria-label="Project three: coming soon">
+                      <span class="cs-stage">
+                        <span class="cs-photo-back"><span class="ph"></span></span>
+                        <span class="cs-sheet cs-sheet--1"></span>
+                        <span class="cs-sheet cs-sheet--2"></span>
+                        <span class="cs-strip"></span>
+                        <span class="cs-folder">
+                          <span class="cs-tab"><span>proj 03</span></span>
+                          <span class="cs-title">
+                            <span class="cs-name">Coming soon</span>
+                          </span>
+                          <span class="cs-desc">On its way&hellip;</span>
+                        </span>
+                        <span class="cs-polaroid">
+                          <span class="ph"></span>
+                          <svg class="cs-pclip cs-pclip--back" style="--wire: url(#g-wire-tea)" aria-hidden="true"><use href="#i-pclip" /></svg><svg class="cs-pclip" style="--wire: url(#g-wire-tea)" aria-hidden="true"><use href="#i-pclip-front" /></svg>
+                        </span>
+                      </span>
+                    </div>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <a class="brand brand--footer" href="#top" aria-label="Back to top">
+        <img src="assets/logo.png" alt="ma* logo" width="1828" height="958" />
+      </a>
+      <ul class="footer-links">
+        <li><a href="mailto:m2abrar@uwaterloo.ca">m2abrar@uwaterloo.ca</a></li>
+        <li><a href="https://drive.google.com/file/d/1McTainVxFS0YrUtruIiKN_nSozdMekVg/view?usp=sharing" target="_blank" rel="noopener">Resume</a></li>
+      </ul>
+      <span class="footer-copy">© <span id="year">2026</span> Maleeha Abrar</span>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
