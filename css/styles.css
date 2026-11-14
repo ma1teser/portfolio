@@ -2137,3 +2137,15 @@ html.modal-open { overflow: hidden; }
 @media (max-width: 760px) { .hero-notes { --hnw: 5.4rem; bottom: 19%; } .hn-note { font-size: .55rem; } .hn-main { font-size: .72rem; } }
 @media (max-width: 760px) { .hero-notes { bottom: 22.5%; } }
 .am-photo img.am-me { object-position: 45% 30%; } /* keep the face and camera in frame */
+
+/* ===== performance: cheaper effects (same look, much less repainting while scrolling) ===== */
+/* header: solid instead of a live blur of everything scrolling underneath it */
+.site-header { -webkit-backdrop-filter: none; backdrop-filter: none; background: rgba(255, 255, 255, .97); }
+/* scroll-in animation: fade + rise only (blurring whole folders as they move was very expensive) */
+.sr { filter: none; scale: 1; transition: opacity .8s ease, translate 1s var(--ease-glide); }
+.sr.is-in { filter: none; }
+/* the slow-spinning flower: its own layer, and it stops once you've scrolled past the hero */
+.hero-flower { will-change: transform; }
+.past-hero .hero-flower, .past-hero .nc-arrow { animation-play-state: paused; }
+/* laptop glow: the gradient is already soft, no blur filter needed */
+.case-laptop-hero::before { filter: none; }

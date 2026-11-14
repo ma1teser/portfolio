@@ -402,8 +402,12 @@
   window.addEventListener("resize", setHeaderH);
   const ws = document.getElementById("workspace");
   const links = document.querySelectorAll(".nav-link");
+  let pastHero = null;
   const onScroll = () => {
     header.classList.toggle("is-scrolled", scrollY > 8);
+    // pause the hero's looping animations once it's out of view (saves the browser work while scrolling)
+    const past = scrollY > innerHeight;
+    if (past !== pastHero) { pastHero = past; root.classList.toggle("past-hero", past); }
     // pages set their active link in the HTML (Workspace is its own page now, so Home stays active on home)
     if (!ws || !document.querySelector('.nav-link[href="#workspace"]')) return;
     const inWs = ws.offsetTop <= scrollY + innerHeight * 0.4;
