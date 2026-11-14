@@ -360,6 +360,21 @@
     zoom.addEventListener("click", (e) => { if (e.target === zoom) closeZoom(); }); // clicked off the image
     zoom.addEventListener("close", () => root.classList.remove("modal-open"));
   }
+  /* 4a. Videos marked data-lazy-video only download and play once they scroll near the screen
+     (keeps the page fast to open), and pause again when they leave it. */
+  const lazyVideos = document.querySelectorAll("video[data-lazy-video]");
+  if (lazyVideos.length) {
+    const startVideo = (v) => { if (!v.src) { v.src = v.dataset.src; } v.play().catch(() => {}); };
+    if ("IntersectionObserver" in window) {
+      const vio = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) startVideo(e.target); else if (e.target.src) e.target.pause(); });
+      }, { rootMargin: "300px 0px" });
+      lazyVideos.forEach((v) => vio.observe(v));
+    } else {
+      lazyVideos.forEach(startVideo);
+    }
+  }
+
   /* 4b2a. About hero sticky notes: each tag's data-note becomes a note on the board beside the title.
      Hovering (or tabbing to) a tag sticks its note on; they stay, so the board fills up as you explore. */
   const notesBoard = document.getElementById("heroNotes");
