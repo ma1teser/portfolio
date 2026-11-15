@@ -419,6 +419,14 @@
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 
+  // while the page is scrolling, pause the looping hero animations (they resume a moment after you stop)
+  let scrollIdle;
+  window.addEventListener("scroll", () => {
+    if (!root.classList.contains("is-scrolling")) root.classList.add("is-scrolling");
+    clearTimeout(scrollIdle);
+    scrollIdle = setTimeout(() => root.classList.remove("is-scrolling"), 180);
+  }, { passive: true });
+
   const menuBtn = document.getElementById("menuBtn");
   const nav = document.getElementById("siteNav");
   const setMenu = (open) => {
