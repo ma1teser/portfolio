@@ -2163,3 +2163,19 @@ body {
 }
 .is-scrolling .hero-flower { animation-play-state: paused; } /* the flower spins while the page is still and pauses during scrolling (spinning while scrolling cost ~10 fps) */
 @media (min-width: 761px) { .case-phone { right: clamp(-4rem, -2.5vw, 0rem); } } /* GraceFully phone sits further right so it clears the wordmark */
+
+/* ===== performance pass 3 =====
+   1. The ruled paper (pink margin line + soft lines) lives on its own GPU layer behind everything.
+      It's drawn once and scrolls with the page, so nothing animating on top can force it to be redrawn. */
+body { position: relative; isolation: isolate; background-image: none; background-color: var(--bg); }
+body::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-image:
+    linear-gradient(90deg, transparent calc(var(--margin-x) - 1px), rgba(236, 156, 157, .28) calc(var(--margin-x) - 1px), rgba(236, 156, 157, .28) var(--margin-x), transparent var(--margin-x)),
+    linear-gradient(to bottom, transparent 0 calc(var(--ruled) - 2px), rgba(36, 23, 16, .045) calc(var(--ruled) - 1px), rgba(36, 23, 16, .045) var(--ruled));
+  background-size: 100% 100%, 100% var(--ruled);
+  background-repeat: no-repeat, repeat;
+  will-change: transform;
+}
+/* 2. While the page is scrolling, every animation on the page holds still; they carry on a moment after you stop */
+.is-scrolling *, .is-scrolling *::before, .is-scrolling *::after { animation-play-state: paused !important; }
