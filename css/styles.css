@@ -2243,3 +2243,11 @@ body::before, .hero-flower, .folder-flower, .nc-arrow, .nc-arrow svg { will-chan
 .wk-card--soon span { font-family: "Playfair Display", serif; font-style: italic; color: var(--aloe, #7F5836); font-size: 1.05rem; }
 .wk-card--soon:hover { rotate: var(--r, 0deg); translate: none; }
 .wk-card--soon { background: #fbf3ef; border: 0; box-shadow: 0 1px 2px rgba(36, 23, 16, .14), 0 12px 24px rgba(36, 23, 16, .14); }
+/* wide screens: centre the main note in the empty space right of "Maleeha?" (on the content's right edge),
+   falling back to the edge-fitted spot when the screen is too narrow for the ring of notes */
+@media (min-width: 761px) {
+  .hero-notes {
+    right: max(calc(-1 * var(--gutter) - var(--hnw) / 2),
+               calc(-1 * (max(0px, (100vw - var(--wrap)) / 2) + var(--gutter)) + var(--hnw) * .81 + 1.5rem));
+  }
+}
