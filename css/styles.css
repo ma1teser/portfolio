@@ -2213,3 +2213,12 @@ html { overflow-x: clip; }
 .nc-arrow, .nc-arrow svg { animation-iteration-count: 4 !important; }
 /* sections far off screen aren't drawn until you scroll near them */
 .cabinet > .folder:not(:first-child) { content-visibility: auto; contain-intrinsic-size: auto 900px; }
+
+/* ===== performance pass 5 =====
+   1. no extra GPU layers: big promoted layers (the page-tall lined background, the flowers) used up graphics memory,
+      which is what made long pages go blurry/pixely during fast scrolling. The lines are a small repeating tile, cheap to draw. */
+body::before, .hero-flower, .folder-flower, .nc-arrow, .nc-arrow svg { will-change: auto !important; backface-visibility: visible !important; }
+/* 2. page-load animation: fade + rise only (animating a blur over big headings made pages stutter while opening) */
+@keyframes load-rise { from { opacity: 0; translate: 0 28px; } }
+/* 3. the flower behind the project folders sits in the middle of the page */
+.folder-flower { left: 50%; }
