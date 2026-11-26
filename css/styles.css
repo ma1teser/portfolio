@@ -2195,3 +2195,21 @@ body::before {
 .folder-flower.is-offscreen { animation-play-state: paused; }
 @media (prefers-reduced-motion: reduce) { .folder-flower { animation: none; } }
 .folder-flower { left: 45%; } /* nudged a little left */
+
+/* keep the faint top flower on smaller screens too (it used to switch off below 900px wide) */
+@media (max-width: 900px) {
+  .hero .hero-aside { display: block; }
+  .hero-flower { --size: clamp(20rem, 70vw, 30rem); left: 84%; top: 26%; }
+}
+/* nothing (flowers, folders) can make the page scroll sideways */
+html { overflow-x: clip; }
+.hero { overflow-x: clip; }
+
+/* ===== light on weaker computers: nothing animates non-stop at 60 frames a second ===== */
+/* flowers: same slow turn, but it moves in small steps (~6 updates a second instead of 60). Looks the same, ~10x less work */
+.hero-flower { animation-timing-function: steps(360, end); }
+.folder-flower { animation-timing-function: steps(540, end); }
+/* the scroll arrow bobs a few times when the page opens, then rests */
+.nc-arrow, .nc-arrow svg { animation-iteration-count: 4 !important; }
+/* sections far off screen aren't drawn until you scroll near them */
+.cabinet > .folder:not(:first-child) { content-visibility: auto; contain-intrinsic-size: auto 900px; }
