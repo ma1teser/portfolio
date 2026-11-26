@@ -2228,3 +2228,6 @@ body::before, .hero-flower, .folder-flower, .nc-arrow, .nc-arrow svg { will-chan
    - off-screen sections are drawn normally again (drawing them on arrival caused hitches mid-scroll) */
 .is-scrolling *, .is-scrolling *::before, .is-scrolling *::after { animation-play-state: inherit; }
 .cabinet > .folder:not(:first-child) { content-visibility: visible; contain-intrinsic-size: none; }
+
+/* flowers: smooth rotation again, spun by the graphics chip on their own small layer (no page redraws) */
+.hero-flower, .folder-flower { animation-timing-function: linear !important; will-change: transform !important; }
