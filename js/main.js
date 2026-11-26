@@ -1,4 +1,4 @@
-/* Maleeha Abrar — portfolio landing page interactions */
+/* Maleeha — portfolio landing page interactions */
 (() => {
   const root = document.documentElement;
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -251,6 +251,12 @@
     zoom.addEventListener("click", (e) => { if (e.target === zoom) closeZoom(); }); // clicked off the image
     zoom.addEventListener("close", () => root.classList.remove("modal-open"));
   }
+  /* 3b. The flower behind the project folders only spins while it's on screen */
+  const folderFlower = document.querySelector(".folder-flower");
+  if (folderFlower && "IntersectionObserver" in window) {
+    new IntersectionObserver(([e]) => folderFlower.classList.toggle("is-offscreen", !e.isIntersecting)).observe(folderFlower);
+  }
+
   /* 4a. Videos marked data-lazy-video only download and play once they scroll near the screen
      (keeps the page fast to open), and pause again when they leave it. */
   const lazyVideos = document.querySelectorAll("video[data-lazy-video]");
