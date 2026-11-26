@@ -2222,3 +2222,9 @@ body::before, .hero-flower, .folder-flower, .nc-arrow, .nc-arrow svg { will-chan
 @keyframes load-rise { from { opacity: 0; translate: 0 28px; } }
 /* 3. the flower behind the project folders sits in the middle of the page */
 .folder-flower { left: 50%; }
+
+/* ===== performance pass 6: nothing extra happens while you scroll =====
+   - the "pause everything while scrolling" rule is gone (main.js now pauses just the two flowers)
+   - off-screen sections are drawn normally again (drawing them on arrival caused hitches mid-scroll) */
+.is-scrolling *, .is-scrolling *::before, .is-scrolling *::after { animation-play-state: inherit; }
+.cabinet > .folder:not(:first-child) { content-visibility: visible; contain-intrinsic-size: none; }

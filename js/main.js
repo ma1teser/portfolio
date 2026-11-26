@@ -204,8 +204,9 @@
     });
   });
 
-  /* 3c. Subtle scroll animation: things gently fade up the first time they scroll into view */
-  if (!reduceMotion && "IntersectionObserver" in window) {
+  /* 3c. Scroll-in fade (switched off: animating whole folders as you scroll made scrolling stutter).
+     Change `false` to `true` to bring it back. */
+  if (false && !reduceMotion && "IntersectionObserver" in window) {
     // (the first folder never fades: the paper's end is tucked under it and must stay hidden)
     const sel = ".cabinet > .folder:not(:first-child), .case-item, .wk, .phone-item, .ws-intro, .ws-more, .am-photo, .am-bio, .am-skill, .am-lists > div, .entry, .footer-inner";
     const io = new IntersectionObserver((entries) => {
@@ -425,13 +426,17 @@
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 
-  // while the page is scrolling, pause the looping hero animations (they resume a moment after you stop)
-  let scrollIdle;
-  window.addEventListener("scroll", () => {
-    if (!root.classList.contains("is-scrolling")) root.classList.add("is-scrolling");
-    clearTimeout(scrollIdle);
-    scrollIdle = setTimeout(() => root.classList.remove("is-scrolling"), 180);
-  }, { passive: true });
+  // while the page is scrolling, pause just the flowers (they carry on a moment after you stop).
+  // Only these two elements change, so the browser doesn't have to re-style the whole page.
+  const flowers = document.querySelectorAll(".hero-flower, .folder-flower");
+  if (flowers.length) {
+    let scrollIdle, paused = false;
+    window.addEventListener("scroll", () => {
+      if (!paused) { paused = true; flowers.forEach((f) => (f.style.animationPlayState = "paused")); }
+      clearTimeout(scrollIdle);
+      scrollIdle = setTimeout(() => { paused = false; flowers.forEach((f) => (f.style.animationPlayState = "")); }, 180);
+    }, { passive: true });
+  }
 
   const menuBtn = document.getElementById("menuBtn");
   const nav = document.getElementById("siteNav");
