@@ -294,6 +294,49 @@
       tag.addEventListener("pointerenter", on);
       tag.addEventListener("focus", on);
     });
+
+    /* Fit the whole ring of notes (main note + every pop-up note) into the space beside the title:
+       below the header, inside the screen's right edge, clear of "Maleeha?". Works at any window size or zoom. */
+    const header = document.querySelector(".site-header");
+    const heroEl = notesBoard.closest(".hero");
+    const titleBits = [...document.querySelectorAll("#aboutTitle .pf, .at-tags li")];
+    const fitNotes = () => {
+      const s = notesBoard.style;
+      s.removeProperty("--hnw"); s.left = s.top = s.right = s.bottom = s.translate = "";
+      if (!matchMedia("(min-width: 761px)").matches) return;
+      notesBoard.classList.add("hn-measure");
+      const b = notesBoard.getBoundingClientRect();
+      const rs = [...notesBoard.querySelectorAll(".hn-note")].map((n) => n.getBoundingClientRect());
+      notesBoard.classList.remove("hn-measure");
+      const w = notesBoard.offsetWidth, h = notesBoard.offsetHeight;
+      // ring edges relative to the main note's top-left corner (unaffected by the load-in animation)
+      const L = Math.min(...rs.map((r) => r.left)) - b.left, T = Math.min(...rs.map((r) => r.top)) - b.top;
+      const R = Math.max(...rs.map((r) => r.right)) - b.left, B = Math.max(...rs.map((r) => r.bottom)) - b.top;
+      const tr = titleBits.map((el) => el.getBoundingClientRect());
+      const titleRight = Math.max(...tr.map((r) => r.right));
+      const pf = tr[0];
+      const cw = document.documentElement.clientWidth;
+      const xMin = titleRight + 24, xMax = cw - 16;
+      const yMin = (header ? header.getBoundingClientRect().bottom : 0) + 16;
+      const yMax = Math.min(window.innerHeight, heroEl ? heroEl.getBoundingClientRect().bottom : window.innerHeight) - 16;
+      // shrink the board if the ring is bigger than the space (never below 7rem wide)
+      const rem = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+      const k = Math.max((7 * rem) / w, Math.min(1, (xMax - xMin) / (R - L), (yMax - yMin) / (B - T)));
+      const nw = w * k, nh = h * k;
+      // main note centred in the gap and on the "Maleeha?" line, then nudged so the ring stays inside the space
+      let left = (xMin + xMax) / 2 - nw / 2, top = (pf.top + pf.bottom) / 2 - nh / 2;
+      left = Math.min(left, xMax - R * k); left = Math.max(left, xMin - L * k);
+      top = Math.min(top, yMax - B * k); top = Math.max(top, yMin - T * k);
+      const p = notesBoard.offsetParent.getBoundingClientRect();
+      s.setProperty("--hnw", nw + "px");
+      s.right = s.bottom = "auto"; s.translate = "none";
+      s.left = left - p.left + "px"; s.top = top - p.top + "px";
+    };
+    const refit = () => requestAnimationFrame(fitNotes);
+    (document.fonts ? document.fonts.ready : Promise.resolve()).then(refit);
+    setTimeout(fitNotes, 2000); // again once the title's load-in animation has settled
+    let fitTimer;
+    window.addEventListener("resize", () => { clearTimeout(fitTimer); fitTimer = setTimeout(fitNotes, 120); });
   }
 
   /* 4b2. About hero polaroid: hovering (or tabbing to) a tag shows that tag's photo */

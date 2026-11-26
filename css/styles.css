@@ -2251,3 +2251,10 @@ body::before, .hero-flower, .folder-flower, .nc-arrow, .nc-arrow svg { will-chan
                calc(-1 * (max(0px, (100vw - var(--wrap)) / 2) + var(--gutter)) + var(--hnw) * .81 + 1.5rem));
   }
 }
+/* while main.js measures the ring of notes: every pop-up note at full size, no transition */
+.hero-notes.hn-measure .hn-pop { scale: 1 !important; transition: none !important; }
+/* note text scales with the note, so it always fits when the board is shrunk to fit the window */
+@media (min-width: 761px) {
+  .hero-notes .hn-pop { font-size: max(.6rem, calc(var(--hnw) * .075)); }
+  .hero-notes .hn-main { font-size: max(.75rem, calc(var(--hnw) * .105)); }
+}
