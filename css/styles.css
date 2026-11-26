@@ -2231,3 +2231,15 @@ body::before, .hero-flower, .folder-flower, .nc-arrow, .nc-arrow svg { will-chan
 
 /* flowers: smooth rotation again, spun by the graphics chip on their own small layer (no page redraws) */
 .hero-flower, .folder-flower { animation-timing-function: linear !important; will-change: transform !important; }
+
+/* Workspace: research poster shows from the top; blank cards for posters still to come */
+.wk-grid--posters .wk--top .wk-card img { object-position: 50% 0%; }
+.wk-card--soon {
+  aspect-ratio: 4 / 5; cursor: default; border-radius: 3px;
+  display: grid; place-items: center;
+  background: repeating-linear-gradient(-45deg, rgba(170,127,102,.08) 0 10px, rgba(170,127,102,.16) 10px 20px), #fbf3ef;
+  border: 1.5px dashed rgba(127,88,54,.4);
+}
+.wk-card--soon span { font-family: "Playfair Display", serif; font-style: italic; color: var(--aloe, #7F5836); font-size: 1.05rem; }
+.wk-card--soon:hover { rotate: var(--r, 0deg); translate: none; }
+.wk-card--soon { background: #fbf3ef; border: 0; box-shadow: 0 1px 2px rgba(36, 23, 16, .14), 0 12px 24px rgba(36, 23, 16, .14); }
